@@ -1,0 +1,85 @@
+{
+  "data": [
+    {
+      "id": "11",
+      "username": "StellarWanderer",
+      "description": "Under the cosmic expanse, the wanderer roams, discovering simplicity in the brilliance of stars. Each night, a philosophical odyssey beneath the celestial tapestry.",
+      "title": "Stellar Serenity",
+      "day": "2d"
+    },
+    {
+      "id": "22",
+      "username": "AzureVagabond",
+      "description": "Seaside philosophy, where waves paint simplicity on sandy canvases. Lost in rhythm, beach-bound musings unfold.",
+      "title": "Coastal Reverie",
+      "day": "7d"
+    },
+    {
+      "id": "33",
+      "username": "ClubZenith",
+      "description": "Dance floor canvas, where simplicity meets pulsating beats. Amidst vibrant lights, a club philosophy unfolds in rhythmic harmony.",
+      "title": "Nocturnal Pulse",
+      "day": "47d"
+    },
+
+    {
+      "id": "44",
+      "username": "NightHarmony",
+      "description": "In the rhythmic pulse of the club, simplicity transforms into a nocturnal symphony. Each beat is a note in the dance of existence, vibrant philosophy expressed under the neon lights of the nocturnal realm",
+      "title": "Nocturnal Reverie",
+      "day": "27d"
+    },
+
+    {
+      "id": "55",
+      "username": "SolitudeSurfer",
+      "description": "Surfing solitary waves, simplicity unfolds in ocean depths. The beach, a sanctuary of profound solitude, mirrors life's profound journey.",
+      "title": "Solitary Seas",
+      "day": "17d"
+    },
+    {
+      "id": "66",
+      "username": "EchoShores",
+      "description": "Listening to sea echoes, simplicity found in timeless waves' dialogue. The beach, a poetic canvas where nature whispers in every tide.",
+      "title": "Seasong Whispers",
+      "day": "7d"
+    },
+    {
+      "id": "1",
+      "username": "DuneDreamer",
+      "description": "Nomad in the desert's embrace, where simplicity dances on grains of time. Each step, a poetic journey through arid wonders.",
+      "title": "Whispers of the Sands",
+      "day": "57d"
+    },
+
+    {
+      "id": "2",
+      "username": "OasisWanderer",
+      "description": "Desert oasis tales reveal simplicity's survival art. Amidst golden sands, philosophy blooms like a hidden gem's allure.",
+      "title": "Chronicles of the Oasis",
+      "day": "7d"
+    },
+    {
+      "id": "3",
+      "username": "EchoingVoyage",
+      "description": "Navigating life's voyage, echoes of simplicity reverberate through every experience. The journey unfolds, a symphony of philosophies whispered by the winds of time.",
+      "title": "Harmony of Echoes",
+      "day": "5d"
+    },
+    {
+      "id": "4",
+      "username": "CoastalZen",
+      "description": "By the sea's edge, simplicity whispers in seashell secrets. Waves carry a tranquil beach philosophy, nature's poetry on the shore.",
+      "title": "Serenity Shores",
+      "day": "37d",
+      "img": "https://images.unsplash.com/photo-1545579133-99bb5ab189bd?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+      "id": "5",
+      "username": "SandSeeker",
+      "description": "Embarking on a nomadic journey through the mesmerizing desert, where simplicity reveals itself in the undulating dance of golden dunes. Each step resonates with the whispers of arid beauty, painting an ephemeral masterpiece in the vast canvas of time.",
+      "title": "Nomad's Odyssey",
+      "day": "67d"
+    }
+  ]
+}

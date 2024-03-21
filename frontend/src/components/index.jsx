@@ -1,3 +1,4 @@
 import Header from "./Header";
-
-export { Header };
+import Container from "./Container";
+import PostCard from "./Post/PostCard";
+export { Header, Container, PostCard };

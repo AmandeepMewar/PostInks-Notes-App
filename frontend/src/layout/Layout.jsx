@@ -1,13 +1,12 @@
-import { Header } from "../components";
+import { Container, Header } from "../components";
 import { FloatingBtn } from "../ui";
 
 const Layout = () => {
   return (
-    <div className=" min-w-full min-h-full">
+    <div className="min-w-full min-h-screen relative">
       <Header />
-      <div>
-        <FloatingBtn />
-      </div>
+      <Container />
+      <FloatingBtn />
     </div>
   );
 };
