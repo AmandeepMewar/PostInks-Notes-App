@@ -1,4 +1,6 @@
 import Header from "./Header";
 import Container from "./Container";
 import PostCard from "./Post/PostCard";
-export { Header, Container, PostCard };
+import PostForm from "./Post/PostForm";
+import PostGrid from "./Post/PostGrid";
+export { Header, Container, PostCard, PostForm, PostGrid };

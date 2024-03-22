@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 const ModalOverlay = (props) => {
   const { className, children } = props;
+
   const handleModalClose = () => {
     props.onHandleModal();
   };

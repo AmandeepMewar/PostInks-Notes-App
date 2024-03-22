@@ -1,7 +1,5 @@
 import { Button } from "../ui";
-import PostGrid from "./post/PostGrid";
-
-import { Masonry } from "masonic";
+import PostGrid from "./Post/PostGrid";
 
 const Container = () => {
   return (

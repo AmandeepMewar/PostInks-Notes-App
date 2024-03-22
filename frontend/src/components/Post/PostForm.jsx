@@ -1,13 +1,16 @@
+import React from "react";
 import { Input, Button } from "../../ui";
 
-const PostForm = () => {
-  const onCancelHandler = () => {};
+const PostForm = (props) => {
+  const onCancelHandler = () => {
+    props.onHandleModal();
+  };
 
   const formSubmitHandle = (e) => {
     e.preventDefault();
   };
   return (
-    <>
+    <React.Fragment>
       <h1 className="text-3xl text-black font-semibold ml-12 pt-5">Create</h1>
       <form className="flex flex-col" onSubmit={formSubmitHandle}>
         <div className="ml-10 mt-5">
@@ -55,7 +58,7 @@ const PostForm = () => {
           </Button>
         </div>
       </form>
-    </>
+    </React.Fragment>
   );
 };
 

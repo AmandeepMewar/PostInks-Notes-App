@@ -1,20 +1,40 @@
-import { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Button } from "../../ui";
 
 import Dropdown from "../Dropdown";
 import Menu from "../../ui/Menu";
+import { ModalContext } from "../../context/ModalContext";
+import ConfirmDialog from "../../ui/ConfirmDialog";
 
 const PostCard = (props) => {
-  const [showMenu, setShowMenu] = useState(false);
   const { username, days, id, description, title } = props;
+
+  const [showMenu, setShowMenu] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
+
+  const { handleModal } = useContext(ModalContext);
 
   const handleMenu = () => {
     setShowMenu((s) => !s);
   };
 
+  const handleDialog = () => {
+    setShowDialog((s) => !s);
+  };
+
+  const EditBtnHandler = () => {
+    handleMenu();
+    handleModal();
+  };
+
+  const DeleteBtnHandler = () => {
+    handleMenu();
+    handleDialog();
+  };
+
   return (
-    <>
+    <React.Fragment>
       {showMenu && (
         <div
           className="min-w-full min-h-screen z-10 fixed top-0 left-0 backdrop-blur-sm"
@@ -46,7 +66,12 @@ const PostCard = (props) => {
             onHandleMenu={handleMenu}
             className="w-24 bg-slate-200 rounded-md absolute top-5 right-10 z-10"
           >
-            <Dropdown firstBtn={"Edit"} secondBtn={"Delete"} />
+            <Dropdown
+              firstBtn={"Edit"}
+              secondBtn={"Delete"}
+              onFirstHandler={EditBtnHandler}
+              onSecondHandler={DeleteBtnHandler}
+            />
           </Menu>
         )}
 
@@ -55,7 +80,9 @@ const PostCard = (props) => {
           <p>{description}</p>
         </div>
       </div>
-    </>
+
+      {showDialog && <ConfirmDialog onHandleModal={handleDialog} />}
+    </React.Fragment>
   );
 };
 
