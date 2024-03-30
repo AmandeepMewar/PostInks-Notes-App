@@ -1,13 +1,13 @@
-import {} from "react";
-import "./App.css";
-import Layout from "./layout/Layout";
-import { ModalProvider } from "./context/ModalContext";
+import {} from 'react';
+import './App.css';
+import Layout from './layout/Layout';
+import { PostProvider } from './context/PostContext';
 
 function App() {
   return (
-    <ModalProvider>
+    <PostProvider>
       <Layout />
-    </ModalProvider>
+    </PostProvider>
   );
 }
 
