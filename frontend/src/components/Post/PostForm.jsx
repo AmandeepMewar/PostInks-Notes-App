@@ -6,17 +6,26 @@ import { usePostContext } from '../../context/PostContext';
 import Dialog from '../../ui/Dialog';
 
 const usernames = [
-  'StellarWanderer',
-  'AzureVagabond',
-  'ClubZenith',
-  'NightHarmony',
-  'SolitudeSurfer',
-  'EchoShores',
-  'DuneDreamer',
-  'OasisWanderer',
-  'EchoingVoyage',
-  'CoastalZen',
-  'SandSeeker',
+  'SaintBroseph',
+  'ghostfacegangsta',
+  'fatBatman',
+  'ihavethingstodojpg',
+  'ironmansnap',
+  'HeyYouNotYouYou',
+  'not_james_bond',
+  'intelligent_zombie',
+  'MakunaHatata',
+  'TheKidsCallMeBoss',
+  'friedchocolate',
+  'cereal_killer',
+  'notfunnyatall',
+  'averagestudent',
+  'cuteasducks',
+  'YellowSnowman',
+  'unfinished_sentenc',
+  'me_for_president',
+  'chickenriceandbeans',
+  'bigfootisreal',
 ];
 
 const PostForm = () => {
@@ -48,7 +57,9 @@ const PostForm = () => {
     const formData = new FormData(e.target);
     // console.log(formData);
     let formObject = Object.fromEntries(formData);
-    formObject['username'] = usernames[Math.round(Math.random() * 10)];
+    formObject['username'] =
+      usernames[Math.floor(Math.random() * usernames.length)];
+
     uploadFormData(formObject);
   };
 
@@ -68,7 +79,7 @@ const PostForm = () => {
               defaultValue={addOrEditPost.post?.title || ''}
               required
               id="title"
-              className="px-2 py-1 rounded-md border bg-gray-200 shadow-md placeholder:text-gray-400 text-black w-2/3 "
+              className="px-2 py-1 rounded-md bg-gray-200 shadow-md placeholder:text-gray-400 text-black w-2/3 "
             />
           </div>
 
@@ -82,7 +93,7 @@ const PostForm = () => {
               defaultValue={addOrEditPost.post?.description || ''}
               required
               id="description"
-              className="px-2 py-1 w-11/12 h-28 rounded-md bg-gray-200 placeholder:text-gray-400 border border-gray-300 shadow-sm text-black resize-none"
+              className="px-2 py-1 w-11/12 h-28 rounded-md bg-gray-200 placeholder:text-gray-400 shadow-sm text-black resize-none"
             />
           </div>
 

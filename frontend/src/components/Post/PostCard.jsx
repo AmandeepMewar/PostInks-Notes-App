@@ -3,8 +3,8 @@ import DropdownMenu from '../DropdownMenu';
 const PostCard = ({ picId, post }) => {
   const { username, title, description, image, days } = post;
 
-  const daysGone =
-    days === 0 ? 'today' : days === 1 ? 'Yesterday' : `${days} days ago`;
+  const daysPassed =
+    days === 0 ? 'Today' : days === 1 ? 'Yesterday' : `${days} days ago`;
 
   return (
     <div className="flex flex-col gap-2 text-black bg-slate-300 py-4 px-5 rounded-lg">
@@ -30,11 +30,9 @@ const PostCard = ({ picId, post }) => {
           </div>
         )}
 
-        <p>{description}</p>
+        <p className="whitespace-pre-line">{description}</p>
       </div>
-      <div className="flex flex-row-reverse font-light text-xs">
-        Posted: {daysGone}
-      </div>
+      <div className="flex flex-row-reverse  text-xs">Upload: {daysPassed}</div>
     </div>
   );
 };
