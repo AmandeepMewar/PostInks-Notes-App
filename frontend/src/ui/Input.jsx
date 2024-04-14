@@ -6,10 +6,11 @@ const Input = (props) => {
     placeholder,
     className,
     name,
-    required,
     defaultValue,
     onChange,
     value,
+    minLength,
+    maxLength,
   } = props;
 
   return (
@@ -27,6 +28,8 @@ const Input = (props) => {
         onChange={onChange}
         value={value}
         required
+        minLength={minLength}
+        maxLength={maxLength}
       />
     </>
   );

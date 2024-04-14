@@ -13,6 +13,8 @@ const Layout = () => {
         <PostList />
         <PostForm />
         <DeletePost />
+        <SignIn />
+        <SignUp />
       </Container>
 
       <FloatingBtn />

@@ -1,13 +1,21 @@
+import { useAuthContext } from '../context/AuthContext';
 import { Button } from '../ui';
 
 const Header = () => {
+  const { authDialogHandler } = useAuthContext();
+
   return (
     <header>
-      <div className="flex justify-between pt-10">
+      <div className="flex justify-between items-center pt-5">
         <h1 className="text-5xl font-extrabold">PostInks</h1>
-        <div className="mr-5">
-          <Button className="text-xl border-b-2 transition-transform hover:scale-110 ">
-            Login
+        <div className="md:mr-5">
+          <Button
+            className="text-xl border-b-2 transition-transform hover:scale-110"
+            onClick={() => {
+              authDialogHandler({ signIn: true, signUp: false });
+            }}
+          >
+            Sign in
           </Button>
         </div>
       </div>

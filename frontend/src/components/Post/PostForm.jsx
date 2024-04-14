@@ -73,7 +73,7 @@ const PostForm = () => {
           <div className="ml-10 mt-5">
             <Input
               type="text"
-              placeholder="Enter Title"
+              placeholder="Enter Title..."
               label="Post Title: "
               name="title"
               defaultValue={addOrEditPost.post?.title || ''}
@@ -89,7 +89,7 @@ const PostForm = () => {
             </label>
             <textarea
               name="description"
-              placeholder="Enter Description"
+              placeholder="Enter Description..."
               defaultValue={addOrEditPost.post?.description || ''}
               required
               id="description"
