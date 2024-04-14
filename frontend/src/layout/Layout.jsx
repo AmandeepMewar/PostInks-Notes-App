@@ -1,4 +1,6 @@
 import { Container, Header, PostForm } from '../components';
+import SignIn from '../components/Auth/SignIn';
+import SignUp from '../components/Auth/SignUp';
 import DeletePost from '../components/Post/DeletePost';
 import PostList from '../components/Post/PostList';
 import { FloatingBtn } from '../ui';
@@ -14,6 +16,8 @@ const Layout = () => {
       </Container>
 
       <FloatingBtn />
+      {/* <SignIn /> */}
+      {/* <SignUp /> */}
     </div>
   );
 };

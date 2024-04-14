@@ -8,11 +8,13 @@ const Input = (props) => {
     name,
     required,
     defaultValue,
+    onChange,
+    value,
   } = props;
 
   return (
-    <div>
-      <label htmlFor={id} className="block text-black font-semibold py-2 mb-1">
+    <>
+      <label htmlFor={id} className="block text-black font-semibold py-2">
         {label}
       </label>
       <input
@@ -22,8 +24,11 @@ const Input = (props) => {
         defaultValue={defaultValue}
         name={name}
         id={id}
+        onChange={onChange}
+        value={value}
+        required
       />
-    </div>
+    </>
   );
 };
 
