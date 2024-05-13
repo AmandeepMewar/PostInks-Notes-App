@@ -3,7 +3,7 @@ import PostCard from './PostCard';
 const PostGrid = ({ posts }) => {
   return (
     <>
-      <div className="xl:columns-4  lg:columns-3 sm:columns-2">
+      <div className="xl:columns-4 lg:columns-3 sm:columns-2">
         {posts && posts.length ? (
           posts.map((post, index) => (
             <div

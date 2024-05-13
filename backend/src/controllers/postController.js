@@ -1,6 +1,6 @@
 import Post from '../models/postModel.js';
 
-const getAllPosts = async (req, res) => {
+const getAllPosts = async (req, res, next) => {
   try {
     const posts = await Post.find();
     res.status(200).json({
@@ -11,10 +11,7 @@ const getAllPosts = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err,
-    });
+    next(err);
   }
 };
 

@@ -11,6 +11,9 @@
   "rules": {
     "import/extensions": ["error", "ignorePackages", { "": "never" }],
     "import/prefer-default-export": ["off", { "target": "any" }],
-    "no-param-reassign": "warn"
+    "no-param-reassign": "warn",
+    "object-shorthand": "off",
+    "arrow-body-style": "off",
+    "no-underscore-dangle": "off"
   }
 }

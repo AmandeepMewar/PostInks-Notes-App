@@ -1,0 +1,51 @@
+import User from '../models/userModel.js';
+import ErrorHelper from '../utils/errorHelper.js';
+
+const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.find();
+    res.status(200).json({
+      status: 'success',
+      results: users.length,
+      data: {
+        users,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const createUser = async (req, res, next) => {
+  try {
+    const user = await User.create(req.body);
+
+    res.status(201).json({
+      status: 'success',
+      data: {
+        data: user,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const deleteUser = async (req, res, next) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+
+    if (!user) {
+      return next(new ErrorHelper('No user found with that id', 404));
+    }
+
+    res.status(204).json({
+      status: 'success',
+      data: null,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export { getAllUsers, deleteUser, createUser };

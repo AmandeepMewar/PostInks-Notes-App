@@ -32,7 +32,9 @@ const PostCard = ({ picId, post }) => {
 
         <p className="whitespace-pre-line">{description}</p>
       </div>
-      <div className="flex flex-row-reverse  text-xs">Upload: {daysPassed}</div>
+      <div className="flex flex-row-reverse  text-xs">
+        Last Updated: {daysPassed}
+      </div>
     </div>
   );
 };
