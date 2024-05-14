@@ -1,5 +1,5 @@
 import { promisify } from 'util';
-import ErrorHelper from '../utils/errorHelper.js';
+import ApiError from '../utils/ApiError.js';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
 
@@ -15,10 +15,7 @@ const protect = async (req, res, next) => {
 
     if (!token) {
       return next(
-        new ErrorHelper(
-          'You are not logged in! Please log in to get access.',
-          401
-        )
+        new ApiError('You are not logged in! Please log in to get access.', 401)
       );
     }
 
@@ -27,7 +24,7 @@ const protect = async (req, res, next) => {
     const currentUser = await User.findById(decoded.id);
     if (!currentUser) {
       return next(
-        new ErrorHelper(
+        new ApiError(
           'The user belonging to this token does no longer exist.',
           401
         )

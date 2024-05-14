@@ -1,8 +1,8 @@
-import ErrorHelper from '../utils/errorHelper.js';
+import ApiError from '../utils/ApiError.js';
 
 const handleCastErrorDB = (err) => {
   const message = `Invalid ${err.path}: ${err.value}.`;
-  return new ErrorHelper(message, 400);
+  return new ApiError(message, 400);
 };
 
 const handleValidationErrorDB = (err) => {
@@ -10,7 +10,7 @@ const handleValidationErrorDB = (err) => {
 
   const message = `Invalid input data. ${errors.join('. ')}`;
 
-  return new ErrorHelper(message, 400);
+  return new ApiError(message, 400);
 };
 
 const handleDuplicateFieldsDB = (err) => {
@@ -18,7 +18,7 @@ const handleDuplicateFieldsDB = (err) => {
   console.log(value);
 
   const message = `Duplicate field value: ${value}. Please use another value!`;
-  return new ErrorHelper(message, 400);
+  return new ApiError(message, 400);
 };
 
 const sendErrorDev = (err, req, res) => {

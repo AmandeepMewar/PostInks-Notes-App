@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import User from '../models/userModel.js';
-import ErrorHelper from '../utils/errorHelper.js';
+import ApiError from '../utils/ApiError.js';
 import jwt from 'jsonwebtoken';
 
 const createToken = (id) => {
@@ -54,7 +54,7 @@ const login = async (req, res, next) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return next(new ErrorHelper('Please provide email and password', 400));
+      return next(new ApiError('Please provide email and password', 400));
     }
 
     const user = await User.findOne({ email }).select('+password');
@@ -63,7 +63,7 @@ const login = async (req, res, next) => {
     console.log(checkPass, user);
 
     if (!user || !checkPass) {
-      return next(new ErrorHelper('Incorrect email or password', 401));
+      return next(new ApiError('Incorrect email or password', 401));
     }
 
     createAndSendToken(user, 200, res);

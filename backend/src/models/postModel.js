@@ -3,10 +3,10 @@ import calcDays from '../utils/calcDays.js';
 
 const postSchema = new mongoose.Schema(
   {
-    username: {
-      type: String,
-      required: [true, 'A post must have a username'],
-      trim: true,
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: [true, 'A Post must belong to a user.'],
     },
     description: {
       type: String,
@@ -21,6 +21,15 @@ const postSchema = new mongoose.Schema(
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
+
+postSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'user',
+    select: 'username',
+  });
+
+  next();
+});
 
 postSchema.virtual('days').get(function () {
   const days = calcDays(this.updatedAt);

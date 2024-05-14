@@ -2,7 +2,7 @@ import Post from '../models/postModel.js';
 
 const getAllPosts = async (req, res, next) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().sort({ updatedAt: -1 });
     res.status(200).json({
       status: 'success',
       results: posts.length,

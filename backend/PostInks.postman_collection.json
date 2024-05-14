@@ -1,0 +1,381 @@
+{
+	"info": {
+		"_postman_id": "f9c66f97-1c9b-4078-a740-542d8951e296",
+		"name": "PostInks",
+		"description": "The PostInks API contains endpoints for Posts and User.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33784124"
+	},
+	"item": [
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Get All Posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/posts",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"posts"
+							]
+						},
+						"description": "Use this endpoint to get all the posts."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Post",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/posts/66045e5b4b0919b9357b5563",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"posts",
+								"66045e5b4b0919b9357b5563"
+							]
+						},
+						"description": "Use this endpoint to delete a post."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": \"664289dad7105f36a8296339\",\r\n    \"description\": \"Science is organized knowledge. Wisdom is organized life.\",\r\n    \"title\": \"And Engineering...?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/posts",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"posts"
+							]
+						},
+						"description": "Use this endpoint to create a post."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Post",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"One, two, three o’clock, four o’clock, rock.  Five, six, seven o’clock, eight o’clock, rock.\",\r\n    \"username\": \"Pebble Pimp\",\r\n    \"title\": \"Geologist’s daily schedule\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/posts/6642933dd2cedbfd176b63a0",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"posts",
+								"6642933dd2cedbfd176b63a0"
+							]
+						},
+						"description": "Use this endpoint to update a post."
+					},
+					"response": []
+				}
+			],
+			"description": "You can get all posts, create new ones, and edit and delete posts."
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/users/",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								""
+							]
+						},
+						"description": "Use this endpoint to get all the users."
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"McLovin\",\r\n    \"email\": \"mclovin429@gmail.com\",\r\n    \"password\": \"123456789\",\r\n    \"passwordConfirm\":\"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/users/",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								""
+							]
+						},
+						"description": "Use this endpoint to create a new user."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/users/66428ca621037c00f4009d19",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"66428ca621037c00f4009d19"
+							]
+						},
+						"description": "Use this endpoint to delete a user."
+					},
+					"response": []
+				}
+			],
+			"description": "You can get all Users, create new ones, and edit and delete users. For Admin purpose only."
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set('jwt', pm.response.json().token)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"machinegunkelly\",\r\n    \"email\": \"mgkalltheway@gmail.com\",\r\n    \"password\": \"123456789\",\r\n    \"passwordConfirm\":\"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/users/signup",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"signup"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "AmandeepMewar",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "amanmewar1718@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Use this endpoint to sign up new users."
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set('jwt', pm.response.json().token)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"mclovin429@gmail.com\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/users/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"login"
+							]
+						},
+						"description": "Use this endpoint to login users."
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/users/logout",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"logout"
+							]
+						},
+						"description": "Use this endpoint to logout users."
+					},
+					"response": []
+				}
+			],
+			"description": "Use this endpoint to authenticate users."
+		}
+	]
+}

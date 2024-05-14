@@ -10,6 +10,9 @@ const userSchema = new mongoose.Schema({
     trim: true,
     unique: true,
   },
+  photo: {
+    type: String,
+  },
   email: {
     type: String,
     required: [true, 'Please provide your email'],

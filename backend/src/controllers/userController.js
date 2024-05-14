@@ -1,5 +1,5 @@
 import User from '../models/userModel.js';
-import ErrorHelper from '../utils/errorHelper.js';
+import ApiError from '../utils/ApiError.js';
 
 const getAllUsers = async (req, res, next) => {
   try {
@@ -36,7 +36,7 @@ const deleteUser = async (req, res, next) => {
     const user = await User.findByIdAndDelete(req.params.id);
 
     if (!user) {
-      return next(new ErrorHelper('No user found with that id', 404));
+      return next(new ApiError('No user found with that id', 404));
     }
 
     res.status(204).json({

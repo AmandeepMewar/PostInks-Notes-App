@@ -14,7 +14,7 @@ connectDB();
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
-  console.log(`Application running at port ${port}`);
+  console.log(`Application running at port ${port}...`);
 });
 
 process.on('unhandledRejection', (err) => {
