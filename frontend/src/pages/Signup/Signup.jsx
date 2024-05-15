@@ -17,12 +17,12 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const [inputData, setInputData] = useState({
-    fullname: 'McLovin',
-    username: 'mclovin',
-    email: 'mclovin429@gmail.com',
+    fullname: '',
+    username: '',
+    email: '',
     avatar: '',
-    password: 'mclovin123',
-    passwordConfirm: 'mclovin123',
+    password: '',
+    passwordConfirm: '',
   });
   const [checkPassword, setCheckPassword] = useState(false);
 
@@ -56,7 +56,10 @@ const Signup = () => {
   };
 
   useEffect(() => {
-    if (inputData != '' && inputData.passwordConfirm === inputData.password) {
+    if (
+      inputData.password !== '' &&
+      inputData.passwordConfirm === inputData.password
+    ) {
       setCheckPassword(true);
     } else {
       setCheckPassword(false);

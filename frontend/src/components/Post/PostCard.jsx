@@ -13,7 +13,7 @@ const PostCard = ({ post }) => {
     <div className="flex flex-col gap-2 text-black bg-slate-300 py-4 px-5 rounded-lg">
       <div className="flex justify-between items-center">
         <div className="flex justify-start gap-2">
-          <img src={user?.avatar} alt="" className="rounded-full w-6" />
+          <img src={user?.avatar} alt="" className="rounded-full w-7" />
           <p>{user?.username}</p>
         </div>
 

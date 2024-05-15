@@ -27,14 +27,14 @@ const Header = () => {
           {authData.loggedIn ? (
             <div className="flex flex-col gap-1">
               <div className="flex gap-4 justify-between items-center">
+                <h4 className="text-xl">{authData.fullname}</h4>
                 <img
                   src={`${authData.avatar}`}
                   alt=""
-                  className="rounded-full w-8"
+                  className="rounded-full w-10"
                 />
-                <h4 className="text-xl">{authData.fullname}</h4>
               </div>
-              <Button className="text-end" onClick={logoutHandler}>
+              <Button className="text-lg" onClick={logoutHandler}>
                 Logout
               </Button>
             </div>

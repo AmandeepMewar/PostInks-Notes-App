@@ -10,8 +10,8 @@ import useLogout from '../../hooks/useLogout';
 
 const Login = () => {
   const [inputData, setInputData] = useState({
-    email: 'amanmewar1718@gmail.com',
-    password: 'postInksAdminMewar',
+    email: 'johndoe777@gmail.com',
+    password: 'johndoe123',
   });
   const [hidePassword, setHidePassword] = useState(true);
   const navigate = useNavigate();
