@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import mongoSanitize from 'express-mongo-sanitize';
+import cors from 'cors';
 
 import ApiError from './utils/ApiError.js';
 import globalErrorHandler from './controllers/errorController.js';
@@ -12,6 +13,10 @@ import userRouter from './routes/userRoutes.js';
 const app = express();
 
 app.enable('trust proxy');
+
+app.use(cors());
+
+app.options('*', cors());
 
 app.use(express.static('public'));
 
