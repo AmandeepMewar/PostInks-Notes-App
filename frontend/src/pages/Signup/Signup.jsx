@@ -1,32 +1,41 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Input, Button } from '../../ui';
-import Dialog from '../../ui/Dialog';
 import { FaCheck } from 'react-icons/fa6';
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import { RxCross2 } from 'react-icons/rx';
 import { useAuthContext } from '../../context/AuthContext';
-import { RxCross1 } from 'react-icons/rx';
+import useSignup from '../../hooks/useSignup';
+import { Header } from '../../components';
+import { Container } from '../../components';
+import { useNavigate } from 'react-router-dom';
+import Loader from '../../ui/Loader/Loader';
 
-const SignUp = () => {
-  const { authDialog, authDialogHandler } = useAuthContext();
+const Signup = () => {
+  const { authDataHandler } = useAuthContext();
+  const { signup, error, isLoading } = useSignup();
+
+  const navigate = useNavigate();
 
   const [inputData, setInputData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPass: '',
+    fullname: 'McLovin',
+    username: 'mclovin',
+    email: 'mclovin429@gmail.com',
+    avatar: '',
+    password: 'mclovin123',
+    passwordConfirm: 'mclovin123',
   });
   const [checkPassword, setCheckPassword] = useState(false);
 
   const handleInput = (e) => {
-    const { name, value } = e.target;
-
-    setInputData({ ...inputData, [name]: value });
-    if (name === 'confirmPass' && value != '' && value === inputData.password) {
-      setCheckPassword(true);
-    } else {
-      setCheckPassword(false);
+    if (e.target.name === 'avatar') {
+      setInputData({ ...inputData, avatar: e.target.files[0] });
+      return;
     }
+
+    const { name, value } = e.target;
+    if (name === 'username') {
+      setInputData({ ...inputData, [name]: value.replace(/[^a-z0-9_]/gi, '') });
+    } else setInputData({ ...inputData, [name]: value });
   };
 
   const [hidePassword, setHidePassword] = useState(true);
@@ -35,26 +44,48 @@ const SignUp = () => {
     setHidePassword((h) => !h);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(inputData);
+    const response = await signup(inputData);
+
+    if (!error) {
+      authDataHandler(response.data.user);
+
+      navigate('/');
+    }
   };
 
   useEffect(() => {
-    setHidePassword(true);
-    console.log('Hello');
-  }, [authDialog]);
+    if (inputData != '' && inputData.passwordConfirm === inputData.password) {
+      setCheckPassword(true);
+    } else {
+      setCheckPassword(false);
+    }
+  }, [inputData.passwordConfirm, inputData.password]);
 
   return (
-    authDialog.signUp && (
-      <Dialog className="w-10/12 sm:w-[60%] lg:w-[50%] xl:w-[32%]">
-        <RxCross1
-          className="absolute right-5 top-5 w-5 h-5 cursor-pointer text-gray-600"
-          onClick={() => authDialogHandler({ signIn: false, signUp: false })}
-        />
+    <Container className="min-h-screen mx-5 relative">
+      {isLoading && <Loader />}
+      <Header />
+      <div className="w-10/12 sm:w-[60%] lg:w-[50%] xl:w-[32%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mb-16 rounded-lg shadow-lg bg-slate-300  ">
         <h1 className="text-3xl text-black font-semibold ml-10 pt-5">
           Sign Up
         </h1>
         <form action="" onSubmit={handleSubmit}>
+          <div className="mx-10 mt-2">
+            <Input
+              type="text"
+              placeholder="Enter Fullname..."
+              label="Fullname: "
+              name="fullname"
+              required
+              id="fullname"
+              value={inputData.fullname}
+              onChange={handleInput}
+              className="px-2 py-1 rounded-md bg-gray-200 shadow-md placeholder:text-gray-400 text-black w-full"
+            />
+          </div>
           <div className="mx-10 mt-2">
             <Input
               type="text"
@@ -65,8 +96,6 @@ const SignUp = () => {
               id="username"
               value={inputData.username}
               onChange={handleInput}
-              minLength={4}
-              maxLength={15}
               className="px-2 py-1 rounded-md bg-gray-200 shadow-md placeholder:text-gray-400 text-black w-full"
             />
           </div>
@@ -79,6 +108,18 @@ const SignUp = () => {
               required
               id="email"
               value={inputData.email}
+              onChange={handleInput}
+              className="px-2 py-1 rounded-md bg-gray-200 shadow-md placeholder:text-gray-400 text-black w-full"
+            />
+          </div>
+          <div className="mx-10 mt-2">
+            <Input
+              type="file"
+              placeholder="Upload Image..."
+              label="Profile Image: "
+              name="avatar"
+              required
+              id="avatar"
               onChange={handleInput}
               className="px-2 py-1 rounded-md bg-gray-200 shadow-md placeholder:text-gray-400 text-black w-full"
             />
@@ -101,7 +142,6 @@ const SignUp = () => {
                 value={inputData.password}
                 onChange={handleInput}
                 minLength={8}
-                maxLength={15}
                 className="px-2 py-1 rounded-md bg-gray-200 shadow-md placeholder:text-gray-400 text-black w-full"
               />
               {hidePassword ? (
@@ -129,34 +169,38 @@ const SignUp = () => {
                 type="password"
                 placeholder="Repeat Password..."
                 label="Password: "
-                name="confirmPass"
+                name="passwordConfirm"
                 required
-                id="confirmPass"
-                value={inputData.confirmPass}
+                id="passwordConfirm"
+                value={inputData.passwordConfirm}
                 onChange={handleInput}
                 minLength={8}
-                maxLength={15}
                 className="px-2 py-1 rounded-md bg-gray-200 shadow-md placeholder:text-gray-400 text-black w-full"
               />
               {checkPassword ? (
                 <FaCheck className="absolute right-3 top-1/2 -translate-y-1/2 text-green-600 w-5 h-5" />
               ) : (
-                inputData.confirmPass != '' && (
+                inputData.passwordConfirm != '' && (
                   <RxCross2 className="absolute right-3 top-1/2 -translate-y-1/2 text-red-600 w-5 h-5" />
                 )
               )}
             </div>
+            {error && (
+              <p className="w-full text-sm text-red-600 mt-1 text-end">
+                {error.message}
+              </p>
+            )}
           </div>
-          <div className="mx-10 mb-10 mt-8">
+          <div className="mx-10 mb-5 mt-8 text-black">
             <Button className=" bg-slate-400 rounded-md text-black px-3 py-1 text-center transition-transform active:scale-105 font-semibold w-full">
               Sign Up
             </Button>
             <div className="w-full mt-2 text-center text-sm">
-              <p>I already have an account</p>
+              <p>I already have an account.</p>
               <Button
                 className=" text-red-600 font-semibold border-b-2 border-red-600"
                 onClick={() => {
-                  authDialogHandler({ signIn: true, signUp: false });
+                  navigate('/login');
                 }}
               >
                 Login
@@ -164,9 +208,9 @@ const SignUp = () => {
             </div>
           </div>
         </form>
-      </Dialog>
-    )
+      </div>
+    </Container>
   );
 };
 
-export default SignUp;
+export default Signup;

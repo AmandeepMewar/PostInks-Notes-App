@@ -15,6 +15,23 @@ const getAllPosts = async (req, res, next) => {
   }
 };
 
+const getMyPosts = async (req, res, next) => {
+  try {
+    const posts = await Post.find({ user: req.params.id }).sort({
+      updatedAt: -1,
+    });
+    res.status(200).json({
+      status: 'success',
+      results: posts.length,
+      data: {
+        posts,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const createPost = async (req, res) => {
   try {
     const newPost = await Post.create(req.body);
@@ -69,4 +86,4 @@ const updatePost = async (req, res) => {
   }
 };
 
-export { getAllPosts, createPost, deletePost, updatePost };
+export { getAllPosts, getMyPosts, createPost, deletePost, updatePost };

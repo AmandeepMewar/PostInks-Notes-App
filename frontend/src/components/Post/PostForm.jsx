@@ -4,35 +4,13 @@ import axios from 'axios';
 import Loader from '../../ui/Loader/Loader';
 import { usePostContext } from '../../context/PostContext';
 import Dialog from '../../ui/Dialog';
-
-const usernames = [
-  'SaintBroseph',
-  'ghostfacegangsta',
-  'fatBatman',
-  'ihavethingstodojpg',
-  'ironmansnap',
-  'HeyYouNotYouYou',
-  'not_james_bond',
-  'intelligent_zombie',
-  'MakunaHatata',
-  'TheKidsCallMeBoss',
-  'friedchocolate',
-  'cereal_killer',
-  'notfunnyatall',
-  'averagestudent',
-  'cuteasducks',
-  'YellowSnowman',
-  'unfinished_sentenc',
-  'me_for_president',
-  'chickenriceandbeans',
-  'bigfootisreal',
-];
+import { useAuthContext } from '../../context/AuthContext';
 
 const PostForm = () => {
   const { addOrEditPost, handleAddOrEditPost, setIsUpdated } = usePostContext();
-  // console.log(addOrEditPost);
   const [loading, setLoading] = useState(false);
-  // console.log(addOrEditPost.post?._id);
+
+  const { authData } = useAuthContext();
 
   const uploadFormData = async (data) => {
     try {
@@ -57,8 +35,8 @@ const PostForm = () => {
     const formData = new FormData(e.target);
     // console.log(formData);
     let formObject = Object.fromEntries(formData);
-    formObject['username'] =
-      usernames[Math.floor(Math.random() * usernames.length)];
+    formObject['user'] = authData.id;
+    console.log(authData);
 
     uploadFormData(formObject);
   };

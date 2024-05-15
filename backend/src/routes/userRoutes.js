@@ -6,18 +6,22 @@ import {
   createUser,
   deleteUser,
   getAllUsers,
+  getMe,
+  uploadUserPhoto,
+  resizeUserPhoto,
 } from '../controllers/userController.js';
-import multer from 'multer';
-
-const upload = multer({ dest: 'public/img/users' });
 
 const router = express.Router();
 
-router.post('/signup', upload.single('photo'), signup);
+router.post('/signup', uploadUserPhoto, resizeUserPhoto, signup);
 router.post('/login', login);
 router.get('/logout', logout);
 
-router.use(protect, restrictTo);
+router.use(protect);
+
+router.get('/getMe', getMe);
+
+router.use(restrictTo);
 
 router.route('/').get(getAllUsers).post(createUser);
 router.route('/:id').delete(deleteUser);

@@ -4,25 +4,25 @@ import PostGrid from './PostGrid';
 import Loader from '../../ui/Loader/Loader';
 import { usePostContext } from '../../context/PostContext';
 
-const PostList = () => {
+const PostList = ({ url }) => {
   const { isUpdated } = usePostContext();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   const fetchData = async () => {
+    setError(false);
+    setLoading(true);
     try {
-      setError(false);
-      setLoading(true);
-      const response = await axios.get('/api/v1/posts');
+      const response = await axios.get(url);
       setData(response.data.data.posts);
+      console.log(response.data.data.posts);
     } catch (err) {
       console.log(err);
       setError(true);
-    }
-    setTimeout(() => {
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   useEffect(() => {

@@ -1,32 +1,89 @@
-import { useAuthContext } from '../context/AuthContext';
 import { Button } from '../ui';
+import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../context/AuthContext';
+import { useLocation } from 'react-router-dom';
+import useLogout from '../hooks/useLogout';
+import Loader from '../ui/Loader/Loader';
 
 const Header = () => {
-  const { authDialogHandler } = useAuthContext();
+  const navigate = useNavigate();
+  const { authData, authLogoutHandler } = useAuthContext();
+
+  const { logout, isLoading } = useLogout();
+
+  let location = useLocation().pathname;
+
+  const logoutHandler = async () => {
+    await logout();
+    navigate('/login', { replace: true });
+    authLogoutHandler();
+  };
 
   return (
     <header>
+      {isLoading && <Loader />}
       <div className="flex justify-between items-center pt-5">
         <h1 className="text-5xl font-extrabold">PostInks</h1>
         <div className="md:mr-5">
-          <Button
-            className="text-xl border-b-2 transition-transform hover:scale-110"
-            onClick={() => {
-              authDialogHandler({ signIn: true, signUp: false });
-            }}
-          >
-            Sign in
-          </Button>
+          {authData.loggedIn ? (
+            <div className="flex flex-col gap-1">
+              <div className="flex gap-4 justify-between items-center">
+                <img
+                  src={`${authData.avatar}`}
+                  alt=""
+                  className="rounded-full w-8"
+                />
+                <h4 className="text-xl">{authData.fullname}</h4>
+              </div>
+              <Button className="text-end" onClick={logoutHandler}>
+                Logout
+              </Button>
+            </div>
+          ) : location === '/login' ? (
+            <Button
+              className="text-xl border-b-2 transition-transform hover:scale-110"
+              onClick={() => {
+                navigate('/signup');
+              }}
+            >
+              Sign Up
+            </Button>
+          ) : (
+            <Button
+              className="text-xl border-b-2 transition-transform hover:scale-110"
+              onClick={() => {
+                navigate('/login');
+              }}
+            >
+              Login
+            </Button>
+          )}
         </div>
       </div>
-      <div className="flex gap-3 my-5">
-        <Button className="w-24 bg-gray-400 rounded-md text-black px-3 py-1 text-center transition-transform hover:scale-105 font-semibold">
-          All Posts
-        </Button>
-        <Button className="w-24 bg-slate-300 rounded-md text-black px-3 py-1 text-center transition-transform hover:scale-105 font-semibold">
-          My Posts
-        </Button>
-      </div>
+      {authData.loggedIn && (
+        <div className="flex gap-3 my-5">
+          <Button
+            className={`w-24 rounded-md text-black px-3 py-1 text-center transition-transform hover:scale-105 font-semibold ${
+              location === '/' ? 'bg-slate-400' : 'bg-gray-300 '
+            }`}
+            onClick={() => {
+              navigate('/');
+            }}
+          >
+            All Posts
+          </Button>
+          <Button
+            className={`w-24  rounded-md text-black px-3 py-1 text-center transition-transform hover:scale-105 font-semibold ${
+              location === '/myposts' ? 'bg-slate-400' : 'bg-gray-300 '
+            }`}
+            onClick={() => {
+              navigate('/myposts');
+            }}
+          >
+            My Posts
+          </Button>
+        </div>
+      )}
     </header>
   );
 };

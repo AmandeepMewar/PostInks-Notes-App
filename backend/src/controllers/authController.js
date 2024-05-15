@@ -1,7 +1,7 @@
-import crypto from 'crypto';
+import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
 import ApiError from '../utils/ApiError.js';
-import jwt from 'jsonwebtoken';
+import uploadOnCloudinary from '../utils/cloudinary.js';
 
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -9,7 +9,7 @@ const createToken = (id) => {
   });
 };
 
-const createAndSendToken = (user, statusCode, res) => {
+const createAndSendToken = (user, statusCode, req, res) => {
   const token = createToken(user._id);
 
   const cookieOptions = {
@@ -19,13 +19,13 @@ const createAndSendToken = (user, statusCode, res) => {
     httpOnly: true,
   };
 
-  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+  if (req.secure) cookieOptions.secure = true;
 
   res.cookie('jwt', token, cookieOptions);
 
   user.password = undefined;
 
-  res.status(201).json({
+  res.status(statusCode).json({
     status: 'success',
     token,
     data: {
@@ -36,14 +36,22 @@ const createAndSendToken = (user, statusCode, res) => {
 
 const signup = async (req, res, next) => {
   try {
+    if (!req.file) {
+      return next(new ApiError('Please upload an image', 400));
+    }
+
+    const avatarUrl = await uploadOnCloudinary(req.file.path);
+
     const newUser = await User.create({
+      fullname: req.body.fullname,
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
       passwordConfirm: req.body.passwordConfirm,
+      avatar: avatarUrl,
     });
 
-    createAndSendToken(newUser, 201, res);
+    createAndSendToken(newUser, 201, req, res);
   } catch (err) {
     next(err);
   }
@@ -60,13 +68,12 @@ const login = async (req, res, next) => {
     const user = await User.findOne({ email }).select('+password');
 
     const checkPass = await user?.checkPassword(password, user.password);
-    console.log(checkPass, user);
 
     if (!user || !checkPass) {
       return next(new ApiError('Incorrect email or password', 401));
     }
 
-    createAndSendToken(user, 200, res);
+    createAndSendToken(user, 200, req, res);
   } catch (err) {
     next(err);
   }

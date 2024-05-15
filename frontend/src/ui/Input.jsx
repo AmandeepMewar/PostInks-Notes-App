@@ -10,7 +10,6 @@ const Input = (props) => {
     onChange,
     value,
     minLength,
-    maxLength,
   } = props;
 
   return (
@@ -28,8 +27,8 @@ const Input = (props) => {
         onChange={onChange}
         value={value}
         required
+        autoComplete="off"
         minLength={minLength}
-        maxLength={maxLength}
       />
     </>
   );

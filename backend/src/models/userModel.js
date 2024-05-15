@@ -3,6 +3,10 @@ import validator from 'validator';
 import bcrypt from 'bcryptjs';
 
 const userSchema = new mongoose.Schema({
+  fullname: {
+    type: String,
+    required: [true, 'Please provide your Full name'],
+  },
   username: {
     type: String,
     required: [true, 'Please provide your username'],
@@ -10,8 +14,9 @@ const userSchema = new mongoose.Schema({
     trim: true,
     unique: true,
   },
-  photo: {
+  avatar: {
     type: String,
+    required: [true, 'Please provide your photo'],
   },
   email: {
     type: String,
@@ -33,7 +38,7 @@ const userSchema = new mongoose.Schema({
       validator: function (p) {
         return p === this.password;
       },
-      message: 'Password are not the same!',
+      message: 'Passwords are not the same!',
     },
   },
   role: {

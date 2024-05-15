@@ -1,25 +1,22 @@
 import { Container, Header, PostForm } from '../components';
-import SignIn from '../components/Auth/SignIn';
-import SignUp from '../components/Auth/SignUp';
+
 import DeletePost from '../components/Post/DeletePost';
 import PostList from '../components/Post/PostList';
 import { FloatingBtn } from '../ui';
 
 const Layout = () => {
+  const url = '/api/v1/posts';
+
   return (
     <div className="min-w-full min-h-screen">
-      <Container>
+      <Container className="min-h-screen mx-5 mb-8 ">
         <Header />
-        <PostList />
+        <PostList url={url} />
         <PostForm />
         <DeletePost />
-        <SignIn />
-        <SignUp />
       </Container>
 
       <FloatingBtn />
-      {/* <SignIn /> */}
-      {/* <SignUp /> */}
     </div>
   );
 };
