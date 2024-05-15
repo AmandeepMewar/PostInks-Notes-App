@@ -16,7 +16,6 @@ const PostList = ({ url }) => {
     try {
       const response = await axios.get(url);
       setData(response.data.data.posts);
-      console.log(response.data.data.posts);
     } catch (err) {
       console.log(err);
       setError(true);

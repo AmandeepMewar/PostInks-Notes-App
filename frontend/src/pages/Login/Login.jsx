@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Input, Button } from '../../ui';
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import { useAuthContext } from '../../context/AuthContext';
@@ -6,16 +6,19 @@ import { Container, Header } from '../../components';
 import { useNavigate } from 'react-router-dom';
 import useLogin from '../../hooks/useLogin';
 import Loader from '../../ui/Loader/Loader';
+import useLogout from '../../hooks/useLogout';
 
 const Login = () => {
   const [inputData, setInputData] = useState({
     email: 'amanmewar1718@gmail.com',
-    password: '123456789',
+    password: 'postInksAdminMewar',
   });
   const [hidePassword, setHidePassword] = useState(true);
   const navigate = useNavigate();
 
   const { login, error, isLoading } = useLogin();
+
+  const { logout } = useLogout();
 
   const { authDataHandler } = useAuthContext();
 
@@ -33,12 +36,17 @@ const Login = () => {
 
     if (!error) {
       const response = await login(inputData);
-
       authDataHandler(response.data.user);
-
       navigate('/');
     }
   };
+
+  useEffect(() => {
+    const logoutUser = async () => {
+      await logout();
+    };
+    logoutUser();
+  }, []);
 
   return (
     <>

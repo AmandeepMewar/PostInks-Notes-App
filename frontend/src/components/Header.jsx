@@ -16,7 +16,6 @@ const Header = () => {
   const logoutHandler = async () => {
     await logout();
     navigate('/login', { replace: true });
-    authLogoutHandler();
   };
 
   return (

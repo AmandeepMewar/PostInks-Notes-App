@@ -14,9 +14,12 @@ const app = express();
 
 app.enable('trust proxy');
 
-app.use(cors());
-
-app.options('*', cors());
+app.use(
+  cors({
+    origin: '*',
+    credentials: true,
+  })
+);
 
 app.use(express.static('public'));
 
