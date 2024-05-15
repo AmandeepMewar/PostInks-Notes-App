@@ -15,7 +15,6 @@ const DropdownMenu = ({ post }) => {
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      // console.log(dropdownRef.current);
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setIsOpen(false);
       }

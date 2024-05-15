@@ -5,7 +5,6 @@ const PostCard = ({ post }) => {
   const { user, title, description, days } = post;
 
   const { authData } = useAuthContext();
-  console.log(user?.avatar);
 
   const daysPassed =
     days === 0 ? 'Today' : days === 1 ? 'Yesterday' : `${days} days ago`;

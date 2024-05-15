@@ -33,10 +33,8 @@ const PostForm = () => {
   const formSubmitHandle = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    // console.log(formData);
     let formObject = Object.fromEntries(formData);
     formObject['user'] = authData.id;
-    console.log(authData);
 
     uploadFormData(formObject);
   };
