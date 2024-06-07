@@ -7,7 +7,7 @@ import Loader from '../ui/Loader/Loader';
 
 const Header = () => {
   const navigate = useNavigate();
-  const { authData, authLogoutHandler } = useAuthContext();
+  const { authData } = useAuthContext();
 
   const { logout, isLoading } = useLogout();
 
@@ -15,7 +15,7 @@ const Header = () => {
 
   const logoutHandler = async () => {
     await logout();
-    navigate('/login', { replace: true });
+    navigate('/login');
   };
 
   return (
@@ -24,7 +24,9 @@ const Header = () => {
       <div className="flex justify-between items-center pt-5">
         <h1 className="text-5xl font-extrabold">PostInks</h1>
         <div className="md:mr-5">
-          {authData.loggedIn ? (
+          {authData.loggedIn &&
+          location !== '/signup' &&
+          location !== '/login' ? (
             <div className="flex flex-col gap-1">
               <div className="flex gap-4 justify-between items-center">
                 <h4 className="text-xl">{authData.fullname}</h4>
@@ -59,7 +61,7 @@ const Header = () => {
           )}
         </div>
       </div>
-      {authData.loggedIn && (
+      {authData.loggedIn && location !== '/signup' && location !== '/login' && (
         <div className="flex gap-3 my-5">
           <Button
             className={`w-24 rounded-md text-black px-3 py-1 text-center transition-transform hover:scale-105 font-semibold ${

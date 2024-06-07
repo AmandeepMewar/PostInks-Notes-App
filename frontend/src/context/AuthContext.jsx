@@ -1,16 +1,13 @@
-import axios from 'axios';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const AuthContext = createContext();
 
 const useAuthContext = () => {
   const context = useContext(AuthContext);
-
   if (!context) {
-    throw new Error('useAuthContext must be used within the AuthProvider');
+    throw new Error('useAuthContext must be used within an AuthProvider');
   }
-
   return context;
 };
 
@@ -23,11 +20,8 @@ const AuthProvider = ({ children }) => {
     id: null,
   });
 
-  const navigate = useNavigate();
-
   const authDataHandler = (userData) => {
     setAuthData({
-      ...authData,
       loggedIn: true,
       fullname: userData.fullname,
       username: userData.username,
@@ -38,7 +32,6 @@ const AuthProvider = ({ children }) => {
 
   const authLogoutHandler = () => {
     setAuthData({
-      ...authData,
       loggedIn: false,
       fullname: null,
       username: null,
@@ -47,26 +40,22 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  const fetch = async () => {
+  const checkAuthStatus = async () => {
     try {
       const response = await axios.get('/api/v1/users/getMe');
       authDataHandler(response.data.data.data);
     } catch (err) {
-      navigate('/login');
+      authLogoutHandler();
     }
   };
 
   useEffect(() => {
-    fetch();
+    checkAuthStatus();
   }, []);
 
   return (
     <AuthContext.Provider
-      value={{
-        authDataHandler,
-        authData,
-        authLogoutHandler,
-      }}
+      value={{ authData, authDataHandler, authLogoutHandler }}
     >
       {children}
     </AuthContext.Provider>

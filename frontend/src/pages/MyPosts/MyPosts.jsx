@@ -7,16 +7,20 @@ import { useAuthContext } from '../../context/AuthContext';
 const MyPosts = () => {
   const { authData } = useAuthContext();
 
-  const url = `/api/v1/posts/${authData.id}`;
+  const url = authData.id ? `/api/v1/posts/${authData.id}` : null;
+
   return (
     <div className="min-w-full min-h-screen">
-      <Container className="min-h-screen mx-5 mb-8 ">
+      <Container className="min-h-screen mx-5 mb-8">
         <Header />
-        <PostList url={url} />
-        <PostForm />
-        <DeletePost />
+        {authData.id && (
+          <>
+            <PostList url={url} />
+            <PostForm />
+            <DeletePost />
+          </>
+        )}
       </Container>
-
       <FloatingBtn />
     </div>
   );
