@@ -46,11 +46,10 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await signup(inputData);
 
     if (!error) {
+      const response = await signup(inputData);
       authDataHandler(response.data.user);
-
       navigate('/');
     }
   };

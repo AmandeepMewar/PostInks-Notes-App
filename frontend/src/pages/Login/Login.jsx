@@ -20,7 +20,7 @@ const Login = () => {
 
   const { logout } = useLogout();
 
-  const { authDataHandler } = useAuthContext();
+  const { authData, authDataHandler } = useAuthContext();
 
   const handleEye = () => {
     setHidePassword((h) => !h);
@@ -42,10 +42,12 @@ const Login = () => {
   };
 
   useEffect(() => {
-    const logoutUser = async () => {
-      await logout();
-    };
-    logoutUser();
+    if (authData.loggedIn) {
+      const logoutUser = async () => {
+        await logout();
+      };
+      logoutUser();
+    }
   }, []);
 
   return (
