@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
 
@@ -19,6 +20,8 @@ const AuthProvider = ({ children }) => {
     avatar: null,
     id: null,
   });
+
+  const navigate = useNavigate();
 
   const authDataHandler = (userData) => {
     setAuthData({
@@ -46,6 +49,7 @@ const AuthProvider = ({ children }) => {
       authDataHandler(response.data.data.data);
     } catch (err) {
       authLogoutHandler();
+      navigate('/login');
     }
   };
 
