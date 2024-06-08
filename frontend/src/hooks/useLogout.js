@@ -11,11 +11,7 @@ const useLogout = () => {
 
     try {
       const response = await axios.get('/api/v1/users/logout');
-      if (response.status === 200) {
-        authLogoutHandler();
-      } else {
-        console.error('Logout failed with status:', response.status);
-      }
+      if (response.status === 200) authLogoutHandler();
     } catch (err) {
       console.error('Logout failed:', err);
     } finally {

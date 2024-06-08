@@ -7,13 +7,12 @@ import Loader from '../../ui/Loader/Loader';
 
 const DeletePost = () => {
   const { deletePost, handleDeletePost, setIsUpdated } = usePostContext();
-  const [loading, setLoading] = useState(false);
 
   const postDeleteHandler = async () => {
     try {
       await axios.delete(`/api/v1/posts/${deletePost.postId}`);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
     handleDeletePost({ isOpen: false, postId: null });
     setIsUpdated((curr) => !curr);

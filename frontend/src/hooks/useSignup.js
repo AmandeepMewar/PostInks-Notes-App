@@ -17,7 +17,6 @@ const useSignup = () => {
       });
       return response.data;
     } catch (err) {
-      console.log(err);
       setError(err.response.data);
     } finally {
       setIsLoading(false);

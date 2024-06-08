@@ -25,7 +25,7 @@ const PostForm = () => {
       }
       setIsUpdated((curr) => !curr);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
     handleAddOrEditPost({ isOpen: false, post: null });
   };
