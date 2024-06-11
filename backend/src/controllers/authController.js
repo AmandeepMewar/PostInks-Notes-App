@@ -17,7 +17,9 @@ const createAndSendToken = (user, statusCode, req, res) => {
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
+    sameSite: 'None',
     secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+    path: '/',
   };
 
   res.cookie('jwt', token, cookieOptions);
@@ -79,9 +81,10 @@ const login = async (req, res, next) => {
 };
 
 const logout = (req, res) => {
-  res.cookie('jwt', 'loggedout', {
+  res.clearCookie('jwt', {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
+    sameSite: 'None',
     secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
     path: '/',
   });

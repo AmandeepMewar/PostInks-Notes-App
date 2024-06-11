@@ -16,7 +16,7 @@ app.enable('trust proxy');
 
 app.use(
   cors({
-    origin: '*',
+    origin: 'https://postinksx-crud.netlify.app',
     credentials: true,
   })
 );

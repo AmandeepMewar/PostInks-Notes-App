@@ -15,10 +15,10 @@ const router = express.Router();
 
 router.post('/signup', uploadUserPhoto, resizeUserPhoto, signup);
 router.post('/login', login);
-router.get('/logout', logout);
 
 router.use(protect);
 
+router.post('/logout', logout);
 router.get('/getMe', getMe);
 
 router.use(restrictTo);
