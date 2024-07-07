@@ -34,11 +34,9 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!error) {
-      const response = await login(inputData);
-      authDataHandler(response.data.user);
-      navigate('/');
-    }
+    const response = await login(inputData);
+    authDataHandler(response.data.user);
+    navigate('/');
   };
 
   useEffect(() => {
@@ -114,12 +112,16 @@ const Login = () => {
             </div>
 
             <div className="mx-10 mb-5 mt-5 text-black">
-              <Button className=" bg-slate-400 rounded-md px-3 py-1 text-center transition-transform active:scale-105 font-semibold w-full">
+              <Button
+                type="submit"
+                className=" bg-slate-400 rounded-md px-3 py-1 text-center transition-transform active:scale-105 font-semibold w-full"
+              >
                 Sign In
               </Button>
               <div className="w-full mt-2 text-center text-sm">
                 <p>Don&apos;t have an account?</p>
                 <Button
+                  type="button"
                   className=" text-red-600 font-semibold border-b-2 border-red-600"
                   onClick={() => navigate('/signup')}
                 >

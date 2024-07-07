@@ -1,14 +1,16 @@
 import express from 'express';
 import protect from '../middlewares/protectRoutes.js';
 import restrictTo from '../middlewares/restrictTo.js';
+import {
+  uploadUserPhoto,
+  resizeUserPhoto,
+} from '../middlewares/multerMiddleware.js';
 import { signup, login, logout } from '../controllers/authController.js';
 import {
   createUser,
   deleteUser,
   getAllUsers,
   getMe,
-  uploadUserPhoto,
-  resizeUserPhoto,
 } from '../controllers/userController.js';
 
 const router = express.Router();
